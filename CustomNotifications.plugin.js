@@ -14,33 +14,41 @@ var customSound = {
     outgoingRing: {sound: ""},
     incomingRing: {sound: ""}
 };
-customSound["dd920c06a01e5bb8b09678581e29d56f.mp3"] = customSound.message;
-customSound["e4d539271704b87764dc465b1a061abd.mp3"] = customSound.deafen;
-customSound["5a000a0d4dff083d12a1d4fc2c7cbf66.mp3"] = customSound.undeafen;
-customSound["429d09ee3b86e81a75b5e06d3fb482be.mp3"] = customSound.mute;
-customSound["43805b9dd757ac4f6b9b58c1a8ee5f0d.mp3"] = customSound.unmute;
-customSound["7e125dc075ec6e5ae796e4c3ab83abb3.mp3"] = customSound.voiceDisconnected;
-customSound["8b63833c8d252fedba6b9c4f2517c705.mp3"] = customSound.pttActivate;
-customSound["74ab980d6890a0fa6aa0336182f9f620.mp3"] = customSound.pttDeactivate;
-customSound["5dd43c946894005258d85770f0d10cff.mp3"] = customSound.userJoin;
-customSound["4fcfeb2cba26459c4750e60f626cebdc.mp3"] = customSound.userLeave;
-customSound["c6e92752668dde4eee5923d70441579f.mp3"] = customSound.outgoingRing;
-customSound["84a1b4e11d634dbfa1e5dd97a96de3ad.mp3"] = customSound.incomingRing;
+customSound["./message1.mp3"] = customSound.message;
+customSound["./deafen.mp3"] = customSound.deafen;
+customSound["./undeafen.mp3"] = customSound.undeafen;
+customSound["./mute.mp3"] = customSound.mute;
+customSound["./unmute.mp3"] = customSound.unmute;
+customSound["./disconnect.mp3"] = customSound.voiceDisconnected;
+customSound["./ptt_start.mp3"] = customSound.pttActivate;
+customSound["./ptt_stop.mp3"] = customSound.pttDeactivate;
+customSound["./user_join.mp3"] = customSound.userJoin;
+customSound["./user_leave.mp3"] = customSound.userLeave;
+customSound["./call_calling.mp3"] = customSound.outgoingRing;
+customSound["./call_ringing.mp3"] = customSound.incomingRing;
 
-Audio.prototype._load = Audio.prototype.load;
+var oldAudioLoad;
+webpackJsonp([0], [function(e, t, n) {
+    var tmpSave = {};
+    n.m["3578"](tmpSave,t,n);
+    oldAudioLoad = tmpSave.exports;
+}]);
 
 var CustomNotifications = function () {};
 
 CustomNotifications.prototype.start = function () {
-    Audio.prototype.load = function () 
-    {
-        var fileName = this.src.substr(this.src.lastIndexOf("/")+1);
-        if(customSound[fileName] && customSound[fileName].sound)
-        {
-            this.src = customSound[fileName].sound;
-        }
-        this._load();
-    }
+    var newAudioLoad = function(e) {
+        if(customSound[e] && customSound[e].sound)
+            return customSound[e].sound;
+        return oldAudioLoad(e);
+    };
+    webpackJsonp([0], [function(e, t, n) {
+        n.c[3578] = {
+            id: 3578,
+            loaded: true,
+            exports: newAudioLoad
+        };
+    }]);
 };
 
 CustomNotifications.prototype.load = function () {
@@ -66,7 +74,13 @@ CustomNotifications.prototype.unload = function () {
 };
 
 CustomNotifications.prototype.stop = function () {
-    Audio.prototype.load = Audio.prototype._load;
+    webpackJsonp([0], [function(e, t, n) {
+        n.c[3578] = {
+            id: 3578,
+            loaded: true,
+            exports: oldAudioLoad
+        };
+    }]);
 };
 
 CustomNotifications.prototype.onMessage = function () {
@@ -140,7 +154,7 @@ CustomNotifications.prototype.getDescription = function () {
 };
 
 CustomNotifications.prototype.getVersion = function () {
-    return "1.0";
+    return "1.1";
 };
 
 CustomNotifications.prototype.getAuthor = function () {
