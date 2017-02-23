@@ -83,18 +83,6 @@ CustomNotifications.prototype.stop = function () {
     }]);
 };
 
-CustomNotifications.prototype.onMessage = function () {
-    //called when a message is received
-};
-
-CustomNotifications.prototype.onSwitch = function () {
-    //called when a server or channel is switched
-};
-
-CustomNotifications.prototype.observer = function (e) {
-    //raw MutationObserver event for each mutation
-};
-
 CustomNotifications.SettingsChanged = function (e) {
     var id = e.id.substring(3);
     customSound[id].sound = e.value;
