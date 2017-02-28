@@ -1,7 +1,7 @@
 # bdCustomNotifications
 
 ## How to use:
-![HowToImage](http://i.imgur.com/1DWA4J4.gif)
+![HowToImage](https://github.com/yoshivb/bdCustomNotifications/blob/master/HowTo.gif?raw=true)
 
 ## 1.1 changes
 * Updated code injection to be less update sensitive.
