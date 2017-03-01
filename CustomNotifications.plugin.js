@@ -27,11 +27,24 @@ customSound["./user_leave.mp3"] = customSound.userLeave;
 customSound["./call_calling.mp3"] = customSound.outgoingRing;
 customSound["./call_ringing.mp3"] = customSound.incomingRing;
 
+
+var audioFuncID = 3578;
 var oldAudioLoad;
 webpackJsonp([0], [function(e, t, n) {
-    var tmpSave = {};
-    n.m["3578"](tmpSave,t,n);
-    oldAudioLoad = tmpSave.exports;
+    for(var index = 3000; index < n.m.length; index++)
+    {
+        var output = {};
+        n.m[index](output,t,n);
+        if((typeof output.exports === 'string'|| output.exports instanceof String) && output.exports.endsWith(".mp3"))
+        {
+            audioFuncID = index-1;
+            
+            var tmpSave = {};
+            n.m[audioFuncID](tmpSave,t,n);
+            oldAudioLoad = tmpSave.exports;
+            break;
+        }
+    }
 }]);
 
 var CustomNotifications = function () {};
@@ -43,8 +56,8 @@ CustomNotifications.prototype.start = function () {
         return oldAudioLoad(e);
     };
     webpackJsonp([0], [function(e, t, n) {
-        n.c[3578] = {
-            id: 3578,
+        n.c[audioFuncID] = {
+            id: audioFuncID,
             loaded: true,
             exports: newAudioLoad
         };
@@ -75,8 +88,8 @@ CustomNotifications.prototype.unload = function () {
 
 CustomNotifications.prototype.stop = function () {
     webpackJsonp([0], [function(e, t, n) {
-        n.c[3578] = {
-            id: 3578,
+        n.c[audioFuncID] = {
+            id: audioFuncID,
             loaded: true,
             exports: oldAudioLoad
         };
@@ -104,32 +117,20 @@ CustomNotifications.SettingsChanged = function (e) {
 };
 
 CustomNotifications.prototype.getSettingsPanel = function () {
-    var html = "<h1><b>Settings Panel</b></h1><p><i>Url's to the audio files have to use https.</i></p><div style='float: left; width: 49%;'>\
-    <p>Message:</p><input type='input' style='width: 100%' id='cN.message' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='%message%'></input>\
-    <p>Deafen:</p><input type='input' style='width: 100%' id='cN.deafen' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='%deafen%'></input>\
-    <p>Undeafen:</p><input type='input' style='width: 100%' id='cN.undeafen' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='%undeafen%'></input>\
-    <p>Mute:</p><input type='input' style='width: 100%' id='cN.mute' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='%mute%'></input>\
-    <p>Unmute:</p><input type='input' style='width: 100%' id='cN.unmute' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='%unmute%'></input>\
-    <p>Voice Disconnected:</p><input type='input' style='width: 100%' id='cN.voiceDisconnected' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='%voiceDisconnected%'></input></div>\
-    <div style='float: right; width: 49%;'>\
-    <p>PTT Activate:</p><input type='input' style='width: 100%' id='cN.pttActivate' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='%pttActivate%'></input>\
-    <p>PTT Deactivate:</p><input type='input' style='width: 100%' id='cN.pttDeactivate' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='%pttDeactivate%'></input>\
-    <p>User Join:</p><input type='input' style='width: 100%' id='cN.userJoin' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='%userJoin%'></input>\
-    <p>User Leave:</p><input type='input' style='width: 100%' id='cN.userLeave' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='%userLeave%'></input>\
-    <p>Outgoing Ring:</p><input type='input' style='width: 100%' id='cN.outgoingRing' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='%outgoingRing%'></input>\
-    <p>Incoming Ring:</p><input type='input' style='width: 100%' id='cN.incomingRing' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='%incomingRing%'></input></div>";
-    html = html.replace("%message%", customSound.message.sound);
-    html = html.replace("%deafen%", customSound.deafen.sound);
-    html = html.replace("%undeafen%", customSound.undeafen.sound);
-    html = html.replace("%mute%", customSound.mute.sound);
-    html = html.replace("%unmute%", customSound.unmute.sound);
-    html = html.replace("%voiceDisconnected%", customSound.voiceDisconnected.sound);
-    html = html.replace("%pttActivate%", customSound.pttActivate.sound);
-    html = html.replace("%pttDeactivate%", customSound.pttDeactivate.sound);
-    html = html.replace("%userJoin%", customSound.userJoin.sound);
-    html = html.replace("%userLeave%", customSound.userLeave.sound);
-    html = html.replace("%outgoingRing%", customSound.outgoingRing.sound);
-    html = html.replace("%incomingRing%", customSound.incomingRing.sound);
+    var html = `<h1><b>Settings Panel</b></h1><p><i>Url's to the audio files have to use https.</i></p><div style='float: left; width: 49%;'>
+    <p>Message:</p><input type='input' style='width: 100%' id='cN.message' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='${customSound.message.sound}'></input>
+    <p>Deafen:</p><input type='input' style='width: 100%' id='cN.deafen' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='${customSound.deafen.sound}'></input>
+    <p>Undeafen:</p><input type='input' style='width: 100%' id='cN.undeafen' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='${customSound.undeafen.sound}'></input>
+    <p>Mute:</p><input type='input' style='width: 100%' id='cN.mute' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='${customSound.mute.sound}'></input>
+    <p>Unmute:</p><input type='input' style='width: 100%' id='cN.unmute' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='${customSound.unmute.sound}'></input>
+    <p>Voice Disconnected:</p><input type='input' style='width: 100%' id='cN.voiceDisconnected' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='${customSound.voiceDisconnected.sound}'></input></div>
+    <div style='float: right; width: 49%;'>
+    <p>PTT Activate:</p><input type='input' style='width: 100%' id='cN.pttActivate' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='${customSound.pttActivate.sound}'></input>
+    <p>PTT Deactivate:</p><input type='input' style='width: 100%' id='cN.pttDeactivate' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='${customSound.pttDeactivate.sound}'></input>
+    <p>User Join:</p><input type='input' style='width: 100%' id='cN.userJoin' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='${customSound.userJoin.sound}'></input>
+    <p>User Leave:</p><input type='input' style='width: 100%' id='cN.userLeave' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='${customSound.userLeave.sound}'></input>
+    <p>Outgoing Ring:</p><input type='input' style='width: 100%' id='cN.outgoingRing' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='${customSound.outgoingRing.sound}'></input>
+    <p>Incoming Ring:</p><input type='input' style='width: 100%' id='cN.incomingRing' onchange='CustomNotifications.SettingsChanged(this)' placeholder='(https://....mp3)' value='${customSound.incomingRing.sound}'></input></div>`;
     return html;
 };
 
@@ -142,7 +143,7 @@ CustomNotifications.prototype.getDescription = function () {
 };
 
 CustomNotifications.prototype.getVersion = function () {
-    return "1.1";
+    return "1.2";
 };
 
 CustomNotifications.prototype.getAuthor = function () {
