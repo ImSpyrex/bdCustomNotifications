@@ -5,7 +5,7 @@
 
 ## 1.2 changes
 * Code injection was actually more update sensitive. Should be fixed now.
-![ForsenE](https://static-cdn.jtvnw.net/emoticons/v1/93064/1.0)
+![ForsenE](http://i.imgur.com/9a5Opx7.png)
 * Using Template Literal for the settings tab now.
 
 ## 1.1 changes
