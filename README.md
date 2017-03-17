@@ -1,5 +1,8 @@
 # bdCustomNotifications
 
+# Currently doesn't work!
+(I am sorry but with every update Discord surprises me once again with how the code breaks my plugin)
+
 ## How to use:
 ![HowToImage](https://github.com/yoshivb/bdCustomNotifications/blob/master/HowTo.gif?raw=true)
 
