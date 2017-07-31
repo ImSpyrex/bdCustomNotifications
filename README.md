@@ -1,7 +1,7 @@
 # bdCustomNotifications
 
-# Is likely to stop working.
-(I am sorry but with every update Discord surprises me once again with how the code breaks my plugin)
+# NO LONGER WORKING!
+(I am sorry but with every update Discord surprised me once again with how the code broke my plugin, so I have stopped updating it)
 
 ## How to use:
 ![HowToImage](https://github.com/yoshivb/bdCustomNotifications/blob/master/HowTo.gif?raw=true)
